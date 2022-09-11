@@ -1,7 +1,7 @@
 const { User } = require("../models/User");
 const { success } = require("../helpers/Response");
 const { USER_FOUND, USER_NOT_FOUND } = require("../lang/en/UserConstant");
-const { uploads } = require("../helpers/FileUpload");
+const { single } = require("../helpers/FileUpload");
 
 exports.list = (req, res) => {
 	const data = [...User];
@@ -26,7 +26,7 @@ exports.destroy = (req, res) => {
 };
 
 exports.save = (req, res) => {
-	uploads(req, res, "profile_image", "users");
+	single(req, res, "profile_image", "users");
 	console.log("User", req.body);
 
 	return res.json("User created");
