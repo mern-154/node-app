@@ -14,13 +14,13 @@ app.use(express.json());
 app.use(fileupload({ createParentPath: true }));
 app.use(express.static(path.join(__dirname, "public/uploads")));
 
-const UserRoute = require("./src/routes/UserRoutes");
+const Routes = require("./src/routes/index");
 
 app.get("/", (req, res) => {
 	return res.json("Welcome!");
 });
 
-app.use("/user", UserRoute);
+app.use("/", Routes);
 
 app.listen(PORT, () => {
 	console.log(`Server is running on ${SERVER}`);
