@@ -1,12 +1,20 @@
-const { User } = require("../models/User");
+const User = require("../models/User");
 const { success } = require("../helpers/Response");
-const { USER_FOUND, USER_NOT_FOUND } = require("../lang/en/UserConstant");
 const { single } = require("../helpers/FileUpload");
+const { USER_FOUND, USER_NOT_FOUND } = require("../lang/en/UserConstant");
 
-exports.list = (req, res) => {
-	const data = [...User];
+exports.list = async (req, res) => {
+	try {
+		const page = parseInt(req.query.page) || 1;
+		const limit = parseInt(req.query.limit) || 10;
 
-	return success({ res, msg: USER_FOUND, data, status: 200 });
+		const users = await User.paginate({}, { page, limit });
+
+		return success({ res, msg: USER_FOUND, data: users, status: 200 });
+	} catch (err) {
+		console.log(err);
+		return success({ res, msg: err.message, data: {}, status: 500 });
+	}
 };
 
 exports.details = (req, res) => {

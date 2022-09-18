@@ -14,6 +14,8 @@ app.use(express.json());
 app.use(fileupload({ createParentPath: true }));
 app.use(express.static(path.join(__dirname, "public/uploads")));
 
+require("./src/config/Connection");
+
 const Routes = require("./src/routes/index");
 
 app.get("/", (req, res) => {

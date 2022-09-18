@@ -1,31 +1,46 @@
-const { User } = require("../models/User");
+const bcrypt = require("bcryptjs");
+
+const UserModel = require("../models/User");
 const { success } = require("../helpers/Response");
 const { single } = require("../helpers/FileUpload");
-const { createToken } = require("../helpers/Common");
-const { USER_FOUND, USER_NOT_FOUND } = require("../lang/en/UserConstant");
+const { USER_FOUND } = require("../lang/en/UserConstant");
+const { createToken, passwordEncrypt } = require("../helpers/Common");
 
-exports.login = (req, res) => {
-	const { email, password } = req.body;
+exports.login = async (req, res) => {
+	try {
+		const { email, password } = req.body;
 
-	const user = User.filter((ele) => ele.email === email);
+		let user = await UserModel.findOne({ email });
 
-	if (user.length === 0) return success({ res, msg: "Emial not found!", data: {}, status: 404 });
+		if (Object.keys(user).length === 0) return success({ res, msg: "Emial not found!", data: {}, status: 404 });
 
-	if (password !== "123456") return success({ res, msg: "Password not matched!", data: {}, status: 401 });
+		const isPassMatched = await bcrypt.compare(password, user.password);
 
-	const token = createToken({ name: user[0].name, email: user[0].email });
+		if (!isPassMatched) return success({ res, msg: "Password not matched!", data: {}, status: 401 });
 
-	const data = { ...user[0], token };
+		const token = createToken({ name: `${user.fname} ${user.lname}`, email: user.email });
 
-	return success({ res, msg: "You are loggedin successfully.", data, status: 200 });
+		delete user.password;
+		user.token = token;
+
+		return success({ res, msg: "You are loggedin successfully.", data: user, status: 200 });
+	} catch (err) {
+		return success({ res, msg: err.message, data: {}, status: 500 });
+	}
 };
 
-exports.details = (req, res) => {
-	const data = User.filter((ele) => ele.id === parseInt(req.params.id));
+exports.register = async (req, res) => {
+	try {
+		single(req, res, "profileImage", "users");
 
-	if (data.length === 0) return success({ res, msg: USER_NOT_FOUND, data: {}, status: 404 });
+		const password = passwordEncrypt(req.body.password);
 
-	return success({ res, msg: USER_FOUND, data: data[0], status: 200 });
+		const data = await new UserModel({ ...req.body, password, isAdmin: false }).save();
+
+		return success({ res, msg: USER_FOUND, data, status: 200 });
+	} catch (err) {
+		return success({ res, msg: err.message, data: {}, status: 500 });
+	}
 };
 
 exports.update = (req, res) => {

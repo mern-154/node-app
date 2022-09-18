@@ -6,7 +6,7 @@ const UserRoute = require("./UserRoutes");
 const AuthRoute = require("./AuthRoutes");
 const { auth } = require("../middlewares/Auth");
 
-app.use("/user", auth, UserRoute);
+app.use("/user", UserRoute);
 app.use("/auth", AuthRoute);
 
 module.exports = app;
