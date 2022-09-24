@@ -42,9 +42,6 @@ const userSchema = new mongoose.Schema(
 		isAdmin: {
 			type: Boolean,
 		},
-		token: {
-			type: String,
-		},
 	},
 	{
 		versionKey: false,
@@ -60,5 +57,7 @@ const userSchema = new mongoose.Schema(
 		},
 	}
 ).plugin(mongoosePaginate);
+
+userSchema.virtual("token");
 
 module.exports = mongoose.model("User", userSchema);

@@ -7,9 +7,6 @@ const fileupload = require("express-fileupload");
 const app = express();
 dotenvExpand.expand(dotenv.config());
 
-const PORT = process.env.PORT || 5500;
-const SERVER = process.env.SERVER || "";
-
 app.use(express.json());
 app.use(fileupload({ createParentPath: true }));
 app.use(express.static(path.join(__dirname, "public/uploads")));
@@ -17,6 +14,7 @@ app.use(express.static(path.join(__dirname, "public/uploads")));
 require("./src/config/Connection");
 
 const Routes = require("./src/routes/index");
+const { PORT, SERVER } = require("./src/constants");
 
 app.get("/", (req, res) => {
 	return res.json("Welcome!");

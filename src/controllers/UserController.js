@@ -2,13 +2,11 @@ const User = require("../models/User");
 const { success } = require("../helpers/Response");
 const { single } = require("../helpers/FileUpload");
 const { USER_FOUND, USER_NOT_FOUND } = require("../lang/en/UserConstant");
+const { paginateOptions } = require("../helpers/Common");
 
 exports.list = async (req, res) => {
 	try {
-		const page = parseInt(req.query.page) || 1;
-		const limit = parseInt(req.query.limit) || 10;
-
-		const users = await User.paginate({}, { page, limit });
+		const users = await User.paginate({}, paginateOptions(req));
 
 		return success({ res, msg: USER_FOUND, data: users, status: 200 });
 	} catch (err) {

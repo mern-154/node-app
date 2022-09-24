@@ -42,18 +42,3 @@ exports.register = async (req, res) => {
 		return success({ res, msg: err.message, data: {}, status: 500 });
 	}
 };
-
-exports.update = (req, res) => {
-	return res.json(`User ID is ${req.params.id}`);
-};
-
-exports.destroy = (req, res) => {
-	return res.json(`Deleting User ID is ${req.params.id}`);
-};
-
-exports.save = (req, res) => {
-	single(req, res, "profile_image", "users");
-	console.log("User", req.body);
-
-	return res.json("User created");
-};

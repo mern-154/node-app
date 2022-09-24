@@ -1,4 +1,5 @@
 exports.success = ({ res, data = [], status = 200, msg }) => {
+	console.log("success", msg, data);
 	let success = true;
 
 	if (typeof data === "Array" && data.length === 0) success = false;
