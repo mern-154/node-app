@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
 
-const { SECRET, ROUNDS } = require("../constants/index");
+const { SECRET, ROUNDS, IMAGE_BASE_URL } = require("../constants/index");
 
 exports.createToken = (data) => {
 	const token = jwt.sign(data, SECRET, { expiresIn: "1d" });
@@ -30,4 +30,17 @@ exports.paginateOptions = (req) => {
 	}
 
 	return { page, limit };
+};
+
+exports.ucWords = (str) => {
+	return str
+		.split(" ")
+		.map((ele) => {
+			return ele.charAt(0).toUpperCase() + ele.slice(1);
+		})
+		.join(" ");
+};
+
+exports.getImageURL = (value, folder) => {
+	return `${IMAGE_BASE_URL}/${folder}/${value}`;
 };

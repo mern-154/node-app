@@ -1,15 +1,7 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
-const { IMAGE_BASE_URL } = require("../constants");
-const { dateFormat } = require("../helpers/Common");
-
-const ucWords = (value) => {
-	let newWord = value.split("");
-	newWord = [newWord[0].toUpperCase(), ...newWord.slice(1)].join("");
-
-	return newWord;
-};
+const { dateFormat, ucWords, getImageURL } = require("../helpers/Common");
 
 const userSchema = new mongoose.Schema(
 	{
@@ -31,9 +23,7 @@ const userSchema = new mongoose.Schema(
 		},
 		profileImage: {
 			type: String,
-			get: (value) => {
-				return `${IMAGE_BASE_URL}/users/${value}`;
-			},
+			get: (value) => getImageURL(value, "users"),
 		},
 		dob: {
 			type: Date,

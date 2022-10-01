@@ -32,7 +32,7 @@ exports.destroy = (req, res) => {
 };
 
 exports.save = (req, res) => {
-	single(req, res, "profile_image", "users");
+	single(req, res, "profileImage", "users");
 	console.log("User", req.body);
 
 	return res.json("User created");

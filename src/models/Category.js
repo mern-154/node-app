@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
+const { ucWords } = require("../helpers/Common");
 
 const categorySchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
 			required: true,
+			set: ucWords,
 		},
 		status: {
 			type: Boolean,
@@ -13,6 +15,7 @@ const categorySchema = new mongoose.Schema(
 		},
 		description: {
 			type: String,
+			default: "",
 		},
 	},
 	{
