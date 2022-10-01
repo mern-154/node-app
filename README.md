@@ -11,3 +11,4 @@ coverImage
 status: true
 userId
 categoryId
+tags
