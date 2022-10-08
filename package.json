@@ -1,35 +1,35 @@
 {
-	"name": "app",
-	"version": "1.0.0",
-	"description": "",
-	"main": "server.js",
-	"scripts": {
-		"start": "nodemon server.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/mern-154/node-app.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/mern-154/node-app/issues"
-	},
-	"homepage": "https://github.com/mern-154/node-app#readme",
-	"devDependencies": {
-		"nodemon": "^2.0.19"
-	},
-	"dependencies": {
-		"bcryptjs": "^2.4.3",
-		"cors": "^2.8.5",
-		"dotenv": "^16.0.2",
-		"dotenv-expand": "^9.0.0",
-		"express": "^4.18.1",
-		"express-fileupload": "^1.4.0",
-		"jsonwebtoken": "^8.5.1",
-		"moment-timezone": "^0.5.37",
-		"mongoose": "^6.6.1",
-		"mongoose-paginate-v2": "^1.7.1"
-	}
+  "name": "app",
+  "version": "1.0.0",
+  "description": "git checkout main\r git checkout -b <brnach name>\r git pull origin hari",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mern-154/node-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mern-154/node-app/issues"
+  },
+  "homepage": "https://github.com/mern-154/node-app#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^9.0.0",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment-timezone": "^0.5.37",
+    "mongoose": "^6.6.1",
+    "mongoose-paginate-v2": "^1.7.1"
+  }
 }
