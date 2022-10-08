@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
-
-
-const {ucWords, getImageURL } = require("../helpers/Common");
+const { ucWords, getImageURL } = require("../helpers/Common");
 
 const postsSchema = new mongoose.Schema(
 	{
@@ -15,31 +13,32 @@ const postsSchema = new mongoose.Schema(
 		body: {
 			type: String,
 			required: true,
-			set: ucWords,
 		},
 		coverImage: {
 			type: String,
 			get: (value) => getImageURL(value, "posts"),
 			required: true,
-
 		},
 		status: {
 			type: Boolean,
-			default:true
+			default: true,
 		},
 		userId: {
-			type: String,
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			alias: "user",
 			required: true,
-
 		},
 		categoryId: {
-			type: String,
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Category",
+			alias: "category",
 			required: true,
-			
 		},
-		tags:{
-			type:Array,
-		}
+		tags: {
+			type: Array,
+			default: [],
+		},
 	},
 	{
 		versionKey: false,
@@ -48,6 +47,8 @@ const postsSchema = new mongoose.Schema(
 			transform(doc, res) {
 				delete res._id;
 				delete res.__v;
+				delete res.userId;
+				delete res.categoryId;
 				delete res.createdAt;
 				delete res.updatedAt;
 			},
@@ -55,7 +56,5 @@ const postsSchema = new mongoose.Schema(
 		},
 	}
 ).plugin(mongoosePaginate);
-
-
 
 module.exports = mongoose.model("posts", postsSchema);
