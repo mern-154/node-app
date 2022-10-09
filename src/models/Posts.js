@@ -1,28 +1,18 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
-<<<<<<< HEAD
-
-
-const {ucWords, getImageURL, captializeBody } = require("../helpers/Common");
-=======
-const { ucWords, getImageURL } = require("../helpers/Common");
->>>>>>> ce049ebacf26880d117e7231854c9113bf1fc32a
+const { ucWords, getImageURL, capitalizeBody } = require("../helpers/Common");
 
 const postsSchema = new mongoose.Schema(
 	{
 		title: {
 			type: String,
-			// required: true,
 			set: ucWords,
 		},
 		body: {
 			type: String,
 			required: true,
-<<<<<<< HEAD
-			set: captializeBody,
-=======
->>>>>>> ce049ebacf26880d117e7231854c9113bf1fc32a
+			get: capitalizeBody
 		},
 		coverImage: {
 			type: String,
@@ -31,19 +21,6 @@ const postsSchema = new mongoose.Schema(
 		},
 		status: {
 			type: Boolean,
-<<<<<<< HEAD
-			// default:true
-		},
-		userId: {
-			type: String,
-			// required: true,
-
-		},
-		categoryId: {
-			type: String,
-			// required: true,
-			
-=======
 			default: true,
 		},
 		userId: {
@@ -57,7 +34,6 @@ const postsSchema = new mongoose.Schema(
 			ref: "Category",
 			alias: "category",
 			required: true,
->>>>>>> ce049ebacf26880d117e7231854c9113bf1fc32a
 		},
 		tags: {
 			type: Array,

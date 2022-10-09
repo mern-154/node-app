@@ -41,13 +41,13 @@ exports.ucWords = (str) => {
 		.join(" ");
 };
 
-exports.captializeBody = (str) => {
+exports.capitalizeBody = (str) => {
 	return str
-		.split(".")
+		.split(". ")
 		.map((ele) => {
 			return ele.charAt(0).toUpperCase() + ele.slice(1);
 		})
-		.join(" ");
+		.join(". ");
 };
 
 
