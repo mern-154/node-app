@@ -41,6 +41,16 @@ exports.ucWords = (str) => {
 		.join(" ");
 };
 
+exports.captializeBody = (str) => {
+	return str
+		.split(".")
+		.map((ele) => {
+			return ele.charAt(0).toUpperCase() + ele.slice(1);
+		})
+		.join(" ");
+};
+
+
 exports.getImageURL = (value, folder) => {
 	return `${IMAGE_BASE_URL}/${folder}/${value}`;
 };

@@ -3,19 +3,19 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 
 
 
-const {ucWords, getImageURL } = require("../helpers/Common");
+const {ucWords, getImageURL, captializeBody } = require("../helpers/Common");
 
 const postsSchema = new mongoose.Schema(
 	{
 		title: {
 			type: String,
-			required: true,
+			// required: true,
 			set: ucWords,
 		},
 		body: {
 			type: String,
 			required: true,
-			set: ucWords,
+			set: captializeBody,
 		},
 		coverImage: {
 			type: String,
@@ -25,16 +25,16 @@ const postsSchema = new mongoose.Schema(
 		},
 		status: {
 			type: Boolean,
-			default:true
+			// default:true
 		},
 		userId: {
 			type: String,
-			required: true,
+			// required: true,
 
 		},
 		categoryId: {
 			type: String,
-			required: true,
+			// required: true,
 			
 		},
 		tags:{
