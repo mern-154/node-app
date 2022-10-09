@@ -18,7 +18,7 @@ exports.auth = async (req, res, next) => {
 
 		if (!user) return success({ res, msg: "You are Unauthorized!", data: {}, status: 401 });
 
-		req.user = user;
+		req.user = JSON.parse(JSON.stringify(user));
 		next();
 	} catch (err) {
 		return success({ res, msg: err.message, data: {}, status: 500 });
